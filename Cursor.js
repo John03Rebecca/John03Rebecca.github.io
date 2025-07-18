@@ -9,13 +9,15 @@ window.addEventListener('resize', () => {
   canvas.height = window.innerHeight;
 });
 
-let particlesArray = [];
-
+// Mouse tracking
 const mouse = {
   x: undefined,
   y: undefined
 };
 
+let particlesArray = [];
+
+// Mouse move particle trail (desktop)
 window.addEventListener('mousemove', e => {
   mouse.x = e.x;
   mouse.y = e.y;
@@ -25,6 +27,7 @@ window.addEventListener('mousemove', e => {
   }
 });
 
+// Mouse click burst
 window.addEventListener('click', e => {
   mouse.x = e.x;
   mouse.y = e.y;
@@ -34,6 +37,29 @@ window.addEventListener('click', e => {
   }
 });
 
+// Touch move trail (mobile)
+window.addEventListener('touchmove', (e) => {
+  const touch = e.touches[0];
+  mouse.x = touch.clientX;
+  mouse.y = touch.clientY;
+
+  for (let i = 0; i < 3; i++) {
+    particlesArray.push(new Particle());
+  }
+});
+
+// Touch start burst (tap)
+window.addEventListener('touchstart', (e) => {
+  const touch = e.touches[0];
+  mouse.x = touch.clientX;
+  mouse.y = touch.clientY;
+
+  for (let i = 0; i < 15; i++) {
+    particlesArray.push(new Particle(true));
+  }
+});
+
+// Particle logic
 class Particle {
   constructor(isBurst = false) {
     this.x = mouse.x;
@@ -62,6 +88,7 @@ class Particle {
   }
 }
 
+// Animation loop
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
