@@ -5,18 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rebecca John</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .pointing { transform: rotate(-20deg); }
+  </style>
 </head>
 
-<body>
-  <div class="background"></div>
-  <div class="container">
-    <h1 class="animated-name">REBECCA</h1>
+<body class="bg-black text-white">
+
+  <!-- DESKTOP VERSION -->
+  <div class="hidden md:block relative min-h-screen">
+    <div class="background"></div>
+    <div class="container">
+      <h1 class="animated-name">REBECCA</h1>
+    </div>
+    <div class="custom-cursor"></div>
+    <div class="click-effect-container"></div>
+    <canvas id="cursorCanvas"></canvas>
   </div>
-  <div class="custom-cursor"></div>
-  <div class="click-effect-container"></div>
-  <canvas id="cursorCanvas"></canvas>
 
+  <!-- MOBILE VERSION -->
+  <div class="block md:hidden relative min-h-screen overflow-hidden bg-gray-100 text-black">
+    <!-- Center Stick Figure -->
+    <div class="flex justify-center items-center h-[60vh] relative">
+      <div class="relative">
+        <img id="stickman" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Stick_Figure.svg" alt="Stickman" class="w-32 h-32 transition-transform duration-300" />
+        <div id="speech-bubble" class="hidden absolute -top-12 left-1/2 -translate-x-1/2 bg-white text-black text-sm p-2 rounded shadow-md">
+          Hello!
+        </div>
+      </div>
+    </div>
 
-<script src="Cursor.js"></script>
+    <!-- Navigation Buttons -->
+    <div class="absolute inset-x-0 bottom-8 flex justify-center gap-4">
+      <button onclick="goToSection('about', 'About')" class="bg-blue-500 text-white px-3 py-1 rounded">About</button>
+      <button onclick="goToSection('experience', 'Experience')" class="bg-green-500 text-white px-3 py-1 rounded">Experience</button>
+      <button onclick="goToSection('projects', 'Projects')" class="bg-purple-500 text-white px-3 py-1 rounded">Projects</button>
+      <button onclick="goToSection('volunteer', 'Volunteer Work')" class="bg-pink-500 text-white px-3 py-1 rounded">Volunteer</button>
+    </div>
+  </div>
+
+  <!-- Shared Sections -->
+  <div id="about" class="h-screen flex items-center justify-center bg-white text-black">
+    <h1 class="text-2xl font-bold">About Me</h1>
+  </div>
+  <div id="experience" class="h-screen flex items-center justify-center bg-gray-200 text-black">
+    <h1 class="text-2xl font-bold">My Experience</h1>
+  </div>
+  <div id="projects" class="h-screen flex items-center justify-center bg-white text-black">
+    <h1 class="text-2xl font-bold">My Projects</h1>
+  </div>
+  <div id="volunteer" class="h-screen flex items-center justify-center bg-gray-200 text-black">
+    <h1 class="text-2xl font-bold">Volunteer Work</h1>
+  </div>
+
+  <!-- Scripts -->
+  <script src="Cursor.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
